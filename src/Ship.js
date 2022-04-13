@@ -1,12 +1,11 @@
 //defines a FUNCTION Ship 
 function Ship() {
-    this.startingPort = 'Dover';
-}
+    this.startingPort = null;
+};
 
+Ship.prototype.setSail = function () {
+};
 
-// Ship.prototype.setSail = function () {
-//     this.setSail = this.setSail;
-// }
 
 
 //exports the Ship FUNCTION from the file
