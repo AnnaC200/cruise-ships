@@ -17,7 +17,7 @@ describe('port constructor', () => {
 
     it('can add a ship', () => {
        
-        const ship = {};
+        const ship = jest.fn();
 
        dover.addShip(ship);
 
@@ -26,8 +26,8 @@ describe('port constructor', () => {
 
     it('can remove a ship', () => {
         
-        const titanic = {};
-        const bloodyMary = {};
+        const titanic = jest.fn();
+        const bloodyMary = jest.fn();
 
         dover.addShip(titanic);
         dover.addShip(bloodyMary);
