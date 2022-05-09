@@ -1,43 +1,32 @@
-//defines a Ship constructor
-function Ship (itinerary) {
-    // pass an instance of ITINERARY into SHIP constructor.
-    this.itinerary = itinerary;
-    //Assign an ITINERARY property so we can keep accessing it. 
-    this.currentPort = itinerary.ports[0];
-    //retrieving ports via itinerary and using [] to access the first array
-    this.previousPort = null
-    this.currentPort.addShip(this);
-  }
+(function exportShip () {
+  function Ship(itinerary) {
+  this.itinerary = itinerary;
+  this.currentPort = itinerary.ports[0];
+  this.previousPort = null;
 
-Ship.prototype.setSail = function () {
-    const itinerary = this.itinerary;
-    const currentPortIndex = itinerary.ports.indexOf(this.currentPort);
-
-    if (currentPortIndex === (itinerary.ports.length - 1)) {
-        throw new Error('End of itinerary reached');
-    }
-
-    this.previousPort = this.currentPort;
-    this.currentPort = null;
-
-    this.previousPort.removeShip(this);
-};
-
-Ship.prototype.dock = function () {
-    const itinerary = this.itinerary;
-    const previousPortIndex = itinerary.ports.indexOf(this.previousPort);
-   
-
-    this.currentPort = itinerary.ports[previousPortIndex + 1];
-    this.currentPort.addShip(this);
-  
+  this.currentPort.addShip(this);
 }
 
+Ship.prototype = {
+  setSail() {
+    const currentPortIndex = this.itinerary.ports.indexOf(this.currentPort);
+    if (currentPortIndex === this.itinerary.ports.length - 1) {
+      throw new Error('End of itinerary reached');
+    }
+    this.currentPort.removeShip(this);
+    this.previousPort = this.currentPort;
+    this.currentPort = null;
+  },
+  dock() {
+    const previousPortIndex = this.itinerary.ports.indexOf(this.previousPort);
+    this.currentPort = this.itinerary.ports[previousPortIndex + 1];
+    this.currentPort.addShip(this);
+  },
+};
 
-
-
-
-
-//exports the Ship FUNCTION from the file
-module.exports = Ship;
-
+if (typeof module !== 'undefined' && module.exports) {  
+  module.exports = Ship;
+} else {
+  window.Port = Port;
+}
+}());
